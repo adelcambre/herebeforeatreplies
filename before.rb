@@ -57,6 +57,16 @@ __END__
     Created by: 
     %a{:href => "http://twitter.com/adelcambre"} @adelcambre
     
+  :javascript
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    
+  :javascript
+    try {
+    var pageTracker = _gat._getTracker("UA-8458289-1");
+    pageTracker._trackPageview();
+    } catch(err) {}
+    
 @@ yes
 %head
   %title== #{params[:user]} was here before @replies
@@ -74,6 +84,16 @@ __END__
   %p 
     Created by: 
     %a{:href => "http://twitter.com/adelcambre"} @adelcambre
+    
+  :javascript
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+
+  :javascript
+    try {
+    var pageTracker = _gat._getTracker("UA-8458289-1");
+    pageTracker._trackPageview();
+    } catch(err) {}
 
 @@ no
 %head
@@ -89,3 +109,13 @@ __END__
   %p 
     Created by: 
     %a{:href => "http://twitter.com/adelcambre"} @adelcambre
+    
+  :javascript
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+
+  :javascript
+    try {
+    var pageTracker = _gat._getTracker("UA-8458289-1");
+    pageTracker._trackPageview();
+    } catch(err) {}
