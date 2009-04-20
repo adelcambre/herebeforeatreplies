@@ -4,11 +4,16 @@ require 'sinatra'
 
 class TwitterUser
   include HTTParty
+  class Error < StandardError; end
   format :json
 
   def self.created_at(name)
     user = show(name)
-    return nil if user["error"]
+    if user["error"] == "Not found"
+      return nil
+    elsif user["error"]
+      raise Error, user["error"]
+    end
     Time.parse(user["created_at"])
   end
   
@@ -22,13 +27,17 @@ get '/' do
 end
 
 get '/:user' do
-  @created = TwitterUser.created_at(params[:user])
-  if @created and @created < Time.local(2007, 05, 29)
-    haml :yes
-  elsif @created
-    haml :no
-  else
-    haml :not_found
+  begin
+    @created = TwitterUser.created_at(params[:user])
+    if @created and @created < Time.local(2007, 05, 29)
+      haml :yes
+    elsif @created
+      haml :no
+    else
+      haml :not_found
+    end
+  rescue TwitterUser::Error => e
+    haml "%h1 An error occurred: #{e.message}"
   end
 end
 
