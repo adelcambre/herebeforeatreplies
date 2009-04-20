@@ -7,7 +7,13 @@ class TwitterUser
   format :json
 
   def self.created_at(name)
-    Time.parse(get("http://twitter.com/users/show/#{name}.json")["created_at"])
+    user = show(name)
+    return nil if user["error"]
+    Time.parse(user["created_at"])
+  end
+  
+  def self.show(name)
+    get("http://twitter.com/users/show/#{name}.json")
   end
 end
 
@@ -17,10 +23,12 @@ end
 
 get '/:user' do
   @created = TwitterUser.created_at(params[:user])
-  if @created < Time.local(2007, 05, 29)
+  if @created and @created < Time.local(2007, 05, 29)
     haml :yes
-  else
+  elsif @created
     haml :no
+  else
+    haml :not_found
   end
 end
 
@@ -110,6 +118,26 @@ __END__
     Created by: 
     %a{:href => "http://twitter.com/adelcambre"} @adelcambre
     
+  :javascript
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+
+  :javascript
+    try {
+    var pageTracker = _gat._getTracker("UA-8458289-1");
+    pageTracker._trackPageview();
+    } catch(err) {}
+    
+@@ not_found
+%head
+  %title== #{params[:user]} was not here before @replies
+  %link{:rel => "stylesheet", :type => "text/css", :href => "/screen.css", :media => :screen}
+%body
+  %h1== @#{params[:user]} doesn't exist on twitter
+
+  %p
+    %a{:href => "/"} Go Back
+
   :javascript
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
     document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
