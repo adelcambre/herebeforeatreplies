@@ -63,8 +63,10 @@ __END__
     were officially added to twitter.
 
   %p 
-    Created by: 
+    Created by
     %a{:href => "http://twitter.com/adelcambre"} @adelcambre
+    \, source code on 
+    %a{:href => "http://github.com/adelcambre/herebeforeatreplies"} github
     
   :javascript
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
