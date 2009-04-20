@@ -60,6 +60,7 @@ __END__
   %p 
     The real question is whether you were here before
     %a{:href => "http://blog.twitter.com/2007/05/are-you-twittering-me.html"} @replies
+    were officially added to twitter.
 
   %p 
     Created by: 
