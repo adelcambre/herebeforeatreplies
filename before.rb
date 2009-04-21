@@ -67,12 +67,14 @@ __END__
     %title Were you here before @replies?
     %link{:rel => "stylesheet", :type => "text/css", :href => "/screen.css", :media => :screen}
   %body
-    = yield
-    %p 
-      Created by
-      %a{:href => "http://twitter.com/adelcambre"} @adelcambre
-      \, source code on 
-      %a{:href => "http://github.com/adelcambre/herebeforeatreplies"} github
+    .content
+      = yield
+    .footer
+      %p 
+        Created by
+        %a{:href => "http://twitter.com/adelcambre"} @adelcambre
+        \, source code on 
+        %a{:href => "http://github.com/adelcambre/herebeforeatreplies"} github
 
     :javascript
       var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
