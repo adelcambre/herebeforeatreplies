@@ -1,11 +1,23 @@
 require 'rubygems'
 require 'httparty'
 require 'sinatra'
+require 'yaml'
 
 class TwitterUser
   include HTTParty
   class Error < StandardError; end
   format :json
+  
+  def self.load_creds(file="creds.yml")
+    unless File.exists?(file)
+      puts "FAIL "
+      return
+    end
+    @@credentials = YAML.load_file(file)["credentials"]
+    basic_auth @@credentials["username"], @@credentials["password"]
+  end
+  
+  base_uri 'twitter.com'
 
   def self.created_at(name)
     user = show(name)
@@ -18,9 +30,11 @@ class TwitterUser
   end
   
   def self.show(name)
-    get("http://twitter.com/users/show/#{name}.json")
+    get("/users/show/#{name}.json")
   end
 end
+
+TwitterUser.load_creds
 
 get '/' do
   haml :index
