@@ -10,7 +10,6 @@ class TwitterUser
   
   def self.load_creds(file="creds.yml")
     unless File.exists?(file)
-      puts "FAIL "
       return
     end
     @@credentials = YAML.load_file(file)["credentials"]
