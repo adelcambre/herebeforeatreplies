@@ -119,7 +119,7 @@ __END__
 %p== #{params[:user]} joined on #{@created.to_s}
   
 @@ not_found
-%h1== @#{params[:user]} doesn't exist on twitter
+%h1== @#{params[:user]} does not exist on twitter
 
 %p
   %a{:href => "/"} Go Back
