@@ -8,15 +8,7 @@ class TwitterUser
   class Error < StandardError; end
   format :json
   
-  def self.load_creds(file="creds.yml")
-    unless File.exists?(file)
-      return
-    end
-    @@credentials = YAML.load_file(file)["credentials"]
-    basic_auth @@credentials["username"], @@credentials["password"]
-  end
-  
-  base_uri 'twitter.com'
+  base_uri 'api.twitter.com'
 
   def self.created_at(name)
     user = show(name)
@@ -29,11 +21,9 @@ class TwitterUser
   end
   
   def self.show(name)
-    get("/users/show/#{name}.json")
+    get("/1/users/show/#{name}.json")
   end
 end
-
-TwitterUser.load_creds
 
 get '/' do
   haml :index
